@@ -1,7 +1,7 @@
 ### Faye
 ---
 https://faye.jcoglan.com/ruby.html
-
+.rb .js
 https://github.com/faye/faye
 
 ```ruby
