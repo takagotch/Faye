@@ -123,6 +123,31 @@ exec $FAYE
 
 ```
 
-```
+```rb
+# config.ru
+require 'faye'
+Faye::WebSocket.load_adapter('thin')
+
+app = Faye::RackAdapter.new(:mount => '/faye', :timeout => 25)
+
+run app
+
+reqyire 'faye'
+require 'permessage_deflate'
+
+bayeux = Faye::RackAdapter.new(:mount => 'faye', :timeout => 25)
+bayeux.add_websocket_extension(PermessageDeflate)
+
+require 'faye'
+require File.expand_path('../app', __FILE__)
+
+use Faye::RackAdapter, :mount => '/faye', :timeout => 25
+
+run Sinatra::Application
+
+use Faye::RackAdapter, :mount => '/faye', timeout => 25 do |bayeux|
+  bayeus.add_extension(MyExtension.new)
+  bayeux.add_websocket_extension(PermessageDeflate)
+end
 ```
 
